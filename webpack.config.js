@@ -1,21 +1,30 @@
+var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-    template: __dirname + '/app/index.html',
-    filename: 'index.html',
-    inject: 'body'
-});
 
-var config = {
-    entry: './app/main.jsx',
+module.exports = {
+    entry: "./app/main",
     output: {
-        publicPath: '/',
-        path: __dirname + '/build',
-        filename: 'bundle.js'
+        path: "./build/",
+        filename: "bundle.js"
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
+    devtool: 'source-map',
+    devServer: {
+        contentBase: "./build",
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: __dirname + '/app/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        })
+    ],
     module: {
+        resolveLoader: {
+            root: path.join(__dirname, "node_modules")
+        },
         preLoaders: [
             {
                 test: /\.jsx$/,
@@ -25,26 +34,19 @@ var config = {
         ],
         loaders: [
             {
-                test: /.jsx?$/,
-                loader: 'babel-loader',
+                // "test" is commonly used to match the file extension
+                test: /\.jsx$/,
+
+                // "exclude" should be used to exclude exceptions
+                // try to prefer "include" when possible
+
+                // the "loader"
+                loader: "babel-loader", // or "babel" because webpack adds the '-loader' automatically
                 exclude: /node_modules/,
                 query: {
                     presets: ['es2015', 'react']
                 }
-            },
-            {
-                test: /\.scss$/,
-                loaders: [
-                    "style",
-                    "css",
-                    "sass"
-                ]
             }
         ]
-    },
-    plugins: [
-        HtmlWebpackPluginConfig
-    ]
+    }
 };
-
-module.exports = config;

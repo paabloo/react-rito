@@ -4,11 +4,11 @@ import {Router, Route, hashHistory} from 'react-router';
 
 import ChampionsCT from '../containers/ChampionsCT';
 
-import Layout from '../components/Layout';
+import LayoutCT from '../containers/LayoutCT';
 
 let routes = (
   <Router history={hashHistory}>
-    <Route path='/' component={Layout}>
+    <Route path='/' component={LayoutCT}>
       <Route path='/champions' component={ChampionsCT} />
     </Route>
   </Router>

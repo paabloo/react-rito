@@ -7,5 +7,9 @@ export function getSimpleChampions() {
       dispatch({type: FETCH_SIMPLE_CHAMPS_DATA, champions: response.data.data});
       dispatch({type: API_FINISHED});
     })
+    .catch((response) => {
+          dispatch({type: API_FINISHED});
+          console.error(response);
+        })
   }
 }

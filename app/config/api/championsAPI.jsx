@@ -5,7 +5,7 @@ const championsAPI = (baseURL, apiKEY) => {
   return {
     getSimpleChampions: () => {
       return axios
-        .get(baseURL + '/api/lol/static-data/eune/v1.2/champion?api_key=' + apiKEY);
+        .get(`${baseURL}/api/lol/static-data/eune/v1.2/champion?api_key=${apiKEY}`);
     }
   }
 }

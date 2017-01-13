@@ -1,19 +1,15 @@
 import { connect } from 'react-redux';
 import Layout from '../components/Layout';
 
+
 const mapStateToProps = (state) => {
     return {
-      ui: state.ui
+      loading: state.ui.apiLoading
     }
 };
 
-const mapDispatchToProps = () => {
-    return {}
-};
-
 const LayoutCT = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Layout);
 
 export default LayoutCT;

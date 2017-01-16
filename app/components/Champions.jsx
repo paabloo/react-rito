@@ -14,7 +14,7 @@ class Champions extends React.Component {
   }
 
   componentWillMount() {
-    this.mapChampsToArray(this.state.champions );
+    this.mapChampsToArray(this.state.champions);
   }
 
   componentWillReceiveProps(props) {
@@ -22,7 +22,7 @@ class Champions extends React.Component {
   }
 
   mapChampsToArray(propChampions) {
-    let champions = Object.keys(propChampions).map(k => propChampions[k]);
+    const champions = Object.keys(propChampions).map(k => propChampions[k]);
     this.setState({
       champions,
       visibleChampions: champions
@@ -38,11 +38,10 @@ class Champions extends React.Component {
   }
 
   filterChampions(force) {
-    let filteredChamps;
     const timer = force ? 0 : 500;
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
-      filteredChamps = this.state.champions.filter(e => e.name.toLowerCase().includes(this.state.search.toLowerCase()));
+      const filteredChamps = this.state.champions.filter(e => e.name.toLowerCase().includes(this.state.search.toLowerCase()));
       this.setState({
         visibleChampions: filteredChamps
       })
@@ -50,7 +49,7 @@ class Champions extends React.Component {
   }
 
   render() {
-    let champs = this.state.visibleChampions ? this.state.visibleChampions.map(c => <ChampionItem {...c} />) : null;
+    const champs = this.state.visibleChampions.map(c => <ChampionItem {...c} />);
     return (
       <div>
         <input className="form-control" value={this.state.search} onChange={this.handleSearchChange} disabled={!this.state.champions.length} />
@@ -70,6 +69,6 @@ class Champions extends React.Component {
 Champions.propTypes = {
   handleButtonClick: PropTypes.func,
   champions: PropTypes.object
-}
+};
 
 export default Champions;
